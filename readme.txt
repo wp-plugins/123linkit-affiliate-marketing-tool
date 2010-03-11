@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: 123linkit
+Contributors: 123LinkIt
 Tags: plugin, posts, affiliate, links, referral, affiliate widget, advertising, make money, text links, masking, cloaking, commission junction, cj
 Requires at least: 2.0.2
 Tested up to: 2.9.2
@@ -15,22 +15,25 @@ Generate money easily from your blog by transforming keywords into affiliate lin
 
 1. Install the plugin
 2. Create an account at [123LinkIt](http://www.123linkit.com "123LinkIt") to receive your Public & Private API keys. These keys will allow us to track your commissions and link data 
-3. In your WordPress blog, go to Settings -> 123LinkIt configuration and input your keys. We recommend copying and pasting this directly to avoid inaccuracy.
+3. In your WordPress blog, go to Settings -> 123LinkIt configuration and input your keys. We recommend copying and pasting these directly to avoid inaccuracy.
 
 == Frequently Asked Questions ==
 
 = See http://123linkit.com/general/faq for a full list
 
+= Sign up to be notified when we release versions for other blogging platforms at http://123linkit.wufoo.com/forms/thank-you-for-your-interest
+
 == Screenshots ==
 
-=Visit our homepage for more info
+=Visit our homepage for more info at http://www.123LinkIt.com
 
 == Changelog ==
 
+=0.1.5-Removed Copy Link column and added URL to advertiser URL field to make it easier to copy. 
+
 =0.1.4-Added new description with more details, fixed links bug.
 
-=0.0.1 =
-* Alpha release - this is the first version of the plugin and some problems will arise. Please contact us anytime with questions or to report bugs. We're committed to making continously improving this plugin and adding new features so please send in your feedback and ideas too.
+=0.0.1-Alpha release-this is the first version of the plugin and some problems will arise. Please contact us anytime with questions or to report bugs. We're committed to making continously improving this plugin and adding new features so please send in your feedback and ideas too.
 
 == Upgrade Notice ==
 No Upgrade Notices

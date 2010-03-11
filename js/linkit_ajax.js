@@ -13,13 +13,12 @@ AjaxManager.prototype = {
         jQuery('div.ajax_working').fadeOut('slow');
         var blog_id = getBlogId();
 		var contents = 0;
-		html = "Thanks for using 123LinkIt! Our goal is to automate as much as this process as possible which is why we're working on automating the embedding of the links. For now, please add them manually. This is done by right-clicking on 'Copy Link' and embedding the link into the keyword we recommend.";
-        html += "<table  class='tablesorter'><thead><tr><th>Keyword</th><th>Advertiser</th><th>Advertising Url</th><th>7 Day EPC</th><th>3 Month EPC</th><th>Copy Link</th></tr></thead><tbody>";
+		html = "Thank you for using 123LinkIt! Our goal is to automate as much as this process as possible which is why we're working on automating the embedding of the links. For now, please add them manually by copying the URL and embedding it into the corresponding keyword suggested. Got feedback? Ideas? Contact us at <a href='http://getsatisfaction.com/123linkit'>http://getsatisfaction.com/123linkit</a>.";
+        html += "<table  class='tablesorter'><thead><tr><th>Keyword</th><th>Advertiser</th><th>Advertising Url</th><th>7 Day EPC</th><th>3 Month EPC</th></tr></thead><tbody>";
         for(keyword in data.advertised){
             for(link in data.advertised[keyword]){
 				contents = contents + 1;
-                html += "<tr><td>"+keyword+"</td><td>" + data.advertised[keyword][link].link.advertiser_name + "</td><td>"+data.advertised[keyword][link].link.link_url+"</td><td>"+data.advertised[keyword][link].link['7dayepc']+"</td><td>"+data.advertised[keyword][link].link["3monepc"]+"</td><td>";
-                html +="<a href="+getPluginDir()+"/123linkit-affiliate-marketing-tool/links.php?bid="+blog_id+"&pid=1&aid="+data.advertised[keyword][link].link.advertiser_id+"&lid="+data.advertised[keyword][link].link.id+"&key="+getKeys()['_pubkey']+" rel=nofollow>"+keyword+"</a></td></tr>";
+                html += "<tr><td>"+keyword+"</td><td>" + data.advertised[keyword][link].link.advertiser_name + "</td><td>"+data.advertised[keyword][link].link.link_url+"</td><td>"+data.advertised[keyword][link].link['7dayepc']+"</td><td>"+data.advertised[keyword][link].link["3monepc"]+"</td></tr>";
             }
         }
 		if(contents == 0)
