@@ -1,0 +1,1 @@
+[15-Nov-2009 04:35:43] PHP Fatal error:  Call to undefined function  add_action() in /home/alext7/public_html/tandrau/wp-content/plugins/123Linkit/linkit.php on line 13
