@@ -1,7 +1,6 @@
 === Plugin Name ===
 Contributors: 123linkit
-Donate link: http://www.123linkit.com/
-Tags: comments, spam
+Tags: plugin, posts, affiliate, links, referral, affiliate widget, advertising, make money, text links, masking, cloaking, commission junction, cj
 Requires at least: 2.0.2
 Tested up to: 2.9.2
 Stable tag: trunk
@@ -10,29 +9,28 @@ Stable tag: trunk
 
 == Description ==
 
-123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
+Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
 
 == Installation ==
 
 1. Install the plugin
-1. Create an account at [123LinkIt](http://www.123linkit.com "123LinkIt")
-1. Go to Settings -> 123LinkIt configuration and input your newly received public and private keys
+2. Create an account at [123LinkIt](http://www.123linkit.com "123LinkIt") to receive your Public & Private API keys. These keys will allow us to track your commissions and link data 
+3. In your WordPress blog, go to Settings -> 123LinkIt configuration and input your keys. We recommend copying and pasting this directly to avoid inaccuracy.
 
 == Frequently Asked Questions ==
 
-= Is it free? =
-
-Yes
+= See http://123linkit.com/general/faq for a full list
 
 == Screenshots ==
 
-No Screenshots
+=Visit our homepage for more info
 
 == Changelog ==
 
-= 0.0.1 =
-* Alpha release
+=0.1.4-Added new description with more details, fixed links bug.
+
+=0.0.1 =
+* Alpha release - this is the first version of the plugin and some problems will arise. Please contact us anytime with questions or to report bugs. We're committed to making continously improving this plugin and adding new features so please send in your feedback and ideas too.
 
 == Upgrade Notice ==
-
 No Upgrade Notices
