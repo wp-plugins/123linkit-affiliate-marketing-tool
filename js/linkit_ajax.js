@@ -1,7 +1,7 @@
 function AjaxManager(pubkey, privkey){
 	this._pubkey = pubkey;
 	this._privkey = privkey;
-    this._url = getPluginDir() + "/123Linkit/simpleproxy.php";
+    this._url = getPluginDir() + "/123linkit-affiliate-marketing-tool/simpleproxy.php";
 }
 
 AjaxManager.prototype = {
@@ -19,7 +19,7 @@ AjaxManager.prototype = {
             for(link in data.advertised[keyword]){
 				contents = contents + 1;
                 html += "<tr><td>"+keyword+"</td><td>" + data.advertised[keyword][link].link.advertiser_name + "</td><td>"+data.advertised[keyword][link].link.link_url+"</td><td>"+data.advertised[keyword][link].link['7dayepc']+"</td><td>"+data.advertised[keyword][link].link["3monepc"]+"</td><td>";
-                html +="<a href="+getPluginDir()+"/123Linkit/links.php?bid="+blog_id+"&pid=1&aid="+data.advertised[keyword][link].link.advertiser_id+"&lid="+data.advertised[keyword][link].link.id+"&key="+getKeys()['_pubkey']+" rel=nofollow>"+keyword+"</a></td></tr>";
+                html +="<a href="+getPluginDir()+"/123linkit-affiliate-marketing-tool/links.php?bid="+blog_id+"&pid=1&aid="+data.advertised[keyword][link].link.advertiser_id+"&lid="+data.advertised[keyword][link].link.id+"&key="+getKeys()['_pubkey']+" rel=nofollow>"+keyword+"</a></td></tr>";
             }
         }
 		if(contents == 0)

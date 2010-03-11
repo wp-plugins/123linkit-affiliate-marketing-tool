@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
-Version: 0.1.2
+Version: 0.1.3
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -22,8 +22,8 @@ if(get_option('linkit_allow_auto') == 1){
 function register_linkitsettings(){
 	register_setting("linkit-options", "linkit_keys");
 	register_setting("linkit-options", "linkit_allow_auto");
-	wp_register_style('tblcss', WP_PLUGIN_URL . '/123Linkit/css/jquery.tablesorter.css');
-	wp_register_style('linkitcss', WP_PLUGIN_URL . '/123Linkit/css/linkit.css');
+	wp_register_style('tblcss', WP_PLUGIN_URL . '/123linkit-affiliate-marketing-tool/css/jquery.tablesorter.css');
+	wp_register_style('linkitcss', WP_PLUGIN_URL . '/123linkit-affiliate-marketing-tool/css/linkit.css');
 }
 
 function linkit_custom_advertise_box(){
@@ -36,7 +36,7 @@ function linkit_custom_advertise_box(){
 }
 
 function linkit_proxy_url(){
-	return get_bloginfo('wpurl').'/wp-content/plugins/123Linkit/simpleproxy.php';
+	return get_bloginfo('wpurl').'/wp-content/plugins/123linkit-affiliate-marketing-tool/simpleproxy.php';
 }
 
 function linkit_admin_head(){
@@ -58,7 +58,7 @@ $keys = get_option('linkit_keys');
             var id = false;
             jQuery.ajax({
                 type: "POST",
-                url: getPluginDir()+"/123Linkit/simpleproxy.php",
+                url: getPluginDir()+"/123linkit-affiliate-marketing-tool/simpleproxy.php",
                 data: { 
                        url: "getBlogId/view.json",
                         baseurl: getBaseUrl(),
@@ -77,8 +77,8 @@ $keys = get_option('linkit_keys');
         }
     </script>
 <?php
-	wp_enqueue_script('linkitscripts', WP_PLUGIN_URL .'/123Linkit/js/linkit_ajax.js', array('jquery'), '0.1');
-	wp_enqueue_script('tblsorter', WP_PLUGIN_URL .'/123Linkit/js/jquery.tablesorter.min.js', array('jquery'), '0.1');
+	wp_enqueue_script('linkitscripts', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/linkit_ajax.js', array('jquery'), '0.1');
+	wp_enqueue_script('tblsorter', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/jquery.tablesorter.min.js', array('jquery'), '0.1');
 }
 function linkit_admin_styles(){
 	wp_enqueue_style('tblcss');
@@ -159,7 +159,7 @@ function linkit_inner_custom_box(){
                 <a href='#' class='update_post'>Add Affiliate Links</a>
                 <div class="notify_div">
                     <div class="ajax_working" style='display: none;'>
-                        <img src="<?php echo WP_PLUGIN_URL;?>/123Linkit/css/ajax-loader.gif"/>
+                        <img src="<?php echo WP_PLUGIN_URL;?>/123linkit-affiliate-marketing-tool/css/ajax-loader.gif"/>
                         Working...
                     </div>
                     <div class="error">

@@ -1,7 +1,7 @@
 function AjaxManager(pubkey, privkey){
 	this._pubkey = pubkey;
 	this._privkey = privkey;
-	this._url = getPluginDir()+"/123Linkit/simpleproxy.php",
+	this._url = getPluginDir()+"/123linkit-affiliate-marketing-tool/simpleproxy.php",
 }
 
 AjaxManager.prototype = {
