@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
-Version: 0.1.6
+Version: 0.1.7
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -77,8 +77,8 @@ $keys = get_option('linkit_keys');
         }
     </script>
 <?php
-	wp_enqueue_script('linkitscripts', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/linkit_ajax.js', array('jquery'), '0.1');
-	wp_enqueue_script('tblsorter', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/jquery.tablesorter.min.js', array('jquery'), '0.1');
+	wp_enqueue_script('linkitscripts', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/linkit_ajax.js', array('jquery'), false);
+	wp_enqueue_script('tblsorter', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/jquery.tablesorter.min.js', array('jquery'), false);
 }
 function linkit_admin_styles(){
 	wp_enqueue_style('tblcss');
