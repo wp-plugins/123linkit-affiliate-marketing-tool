@@ -29,6 +29,8 @@ Generate money easily from your blog by transforming keywords into affiliate lin
 
 == Changelog ==
 
+=0.1.6-Resolved JS Error
+
 =0.1.5-Removed Copy Link column and added URL to advertiser URL field to make it easier to copy. 
 
 =0.1.4-Added new description with more details, fixed links bug.
