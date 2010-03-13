@@ -45,7 +45,7 @@ LinkitMaster.prototype = {
 jQuery(document).ready(function(){
 	key = getKeys()['_pubkey'];
 	
-	if(undefined === tinyMCE) return ;
+	if(window.tinyMCE === undefined) return ;
 	var linkit = new LinkitMaster(tinyMCE, key['_pubkey'], key['_privkey']);
 	linkit.writeHTML();
 	
