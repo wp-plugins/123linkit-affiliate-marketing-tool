@@ -30,20 +30,17 @@ AjaxManager.prototype = {
     advertise: function(data){
         this.ajaxCall(data, '_privkey', this.writeTable);
     },
-    showWork: function(data){
-        jQuery("div.result").fadeOut("slow");
-        jQuery("div.ajax_working").fadeIn("slow");
-    },
 	ajaxCall: function(data, type, func){
 		if(type == '_pubkey'){
 			data['_pubkey'] = this._pubkey;
 		}else{
 			data['_privkey'] = this._privkey;
 		}
+		jQuery("div.result").attr("style", "display: none;");
+        jQuery("div.ajax_working").attr("style", "");
 		jQuery.ajax({
                    type: "POST",
                    url: this._url,
-                   beforeSend: this.showWork,
                    data: data,
                    dataType: "json",
                    async: false,
@@ -59,7 +56,10 @@ function LinkitMaster(tinyMCE, pubkey, privkey){
 
 LinkitMaster.prototype = {
 	getContent: function(){
-		return this._tinyMCE.activeEditor.getContent();
+        var content = "";
+        if (this._tinyMCE.activeEditor == null) content = jQuery("#content").val();
+        else content = this._tinyMCE.activeEditor.getContent();
+		return content;
 	},
 	advertise: function(){
 		content = this.getContent();

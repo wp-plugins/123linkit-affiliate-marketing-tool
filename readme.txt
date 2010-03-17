@@ -29,6 +29,10 @@ Generate money easily from your blog by transforming keywords into affiliate lin
 
 == Changelog ==
 
+=0.1.9-Resolved some more bugs
+ - plugin not working unless tinyMCE is active (does not work when WP goes directly to HTML tab)
+ - waiting gearbox showing while processing a request
+
 =0.1.8-Resolved JS Error
 
 =0.1.5-Removed Copy Link column and added URL to advertiser URL field to make it easier to copy. 

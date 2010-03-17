@@ -33,7 +33,10 @@ LinkitMaster.prototype = {
 		);
 	},
 	getContent: function(){
-		return this._tinyMCE.activeEditor.getContent();
+        var content = "";
+        if (this._tinyMCE.activeEditor == null) content = jQuery("#content").val();
+        else content = this._tinyMCE.activeEditor.getContent();
+		return content;
 	},
 	advertise: function(){
 		content = this.getContent();		

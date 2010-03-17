@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
-Version: 0.1.8
+Version: 0.1.9
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -92,41 +92,19 @@ function change_content($content){
 
     $url = "http://$api_address/api/";
     $blg = "getBlogId/view.json";
-    try{
     
-        $data = "baseurl=".get_bloginfo('url')."&_pubkey=".$keys['_pubkey']; 
+    $data = "baseurl=".get_bloginfo('url')."&_pubkey=".$keys['_pubkey']; 
 
-        $response = posturl($url.$blg, $data);
+    $response = posturl($url.$blg, $data);
 
 		$response = json_decode($response);
 		$id = $response->{'blogs'}->{'blog'}->{'id'};
     
-        $adv = "getAdvertisers/$id/posts/advertise.json";
-        $data = "content=$content&_privkey=".$keys['_privkey'];
-        $response = posturl($url.$adv,$data);
-        if($response['advertised']){
-       /*
-            $key_to_pos = array();
-            foreach($keywords as $keyword => $phrase){
-            //More positions == More relevant (Not completely but simple enough for now)
-                   //$positions = $this->Common->strallpos($content, $phrase['word']);
-                   if(sizeof($positions) >= 1 && $positions != false){
-                      //Get all the links that go with this advertiser
-                      echo "woah";
-                      //$links = $this->link->findAllByAdvertiserId($advertiser['advertisercategory']['advertiser_id']);
-                      //$return_array[$phrase['word']] = $positions;
-                      //$links_array[$phrase['word']] = $links;
-                   }
-            }*/
-            echo "yes!";
-        }
-        return $content;
-
-    }catch(Exception $e){
-        
-        return $content;
-    
-    }
+    $adv = "getAdvertisers/$id/posts/advertise.json";
+    $data = "content=$content&_privkey=".$keys['_privkey'];
+    $response = posturl($url.$adv,$data);
+    if($response['advertised']) echo "yes!";
+    return $content;
 }
 function posturl($url, $data){
 	
