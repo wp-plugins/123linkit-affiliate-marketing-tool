@@ -3,12 +3,12 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
-Version: 0.1.9
+Version: 0.1.10
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
 
-$api_address = "174.143.204.12";
+$api_address = "www.123linkit.com";
 
 //Action adds all the admin menus that I want
 add_action('admin_menu', 'linkit_custom_advertise_box');

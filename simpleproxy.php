@@ -1,6 +1,6 @@
 <?php
 
-$api_address = "174.143.204.12";
+$api_address = "www.123linkit.com";
 
 header("Cache-Control: no-cache");
 
