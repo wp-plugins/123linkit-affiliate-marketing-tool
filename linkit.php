@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
-Version: 0.1.10
+Version: 0.1.11
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -43,42 +43,21 @@ function linkit_admin_head(){
 //We use need some simple convenience functions here
 $keys = get_option('linkit_keys');
 ?>
-	<script type="text/javascript" src="<?php echo WP_PLUGIN_URL; ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+	<script type="text/javascript" src="http://www.123linkit.com/javascripts/tiny_mce.js"></script>
     <script type="text/javascript">
         function getPluginDir(){
             return"<?php echo WP_PLUGIN_URL; ?>";
         }
-	    function getKeys(){ 
+	function getKeys(){ 
             return {'_pubkey': '<?php echo $keys['_pubkey'];?>', '_privkey':'<?php echo $keys['_privkey'];?>'};
         }
         function getBaseUrl(){
             return "<?php echo get_bloginfo('url'); ?>";
         }
-        function getBlogId(){
-            var id = false;
-            jQuery.ajax({
-                type: "POST",
-                url: getPluginDir()+"/123linkit-affiliate-marketing-tool/simpleproxy.php",
-                data: { 
-                       url: "getBlogId/view.json",
-                        baseurl: getBaseUrl(),
-                        _pubkey: getKeys()['_pubkey']
-                    },
-                dataType: "json",
-                async: false,
-                success: function(data){
-                        if(data.blogs != false){
-                            id = data.blogs.blog.id;
-                        }
-                    }
-            
-                });
-             return id;
-        }
     </script>
 <?php
-	wp_enqueue_script('linkitscripts', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/linkit_ajax.js', array('jquery'), false);
-	wp_enqueue_script('tblsorter', WP_PLUGIN_URL .'/123linkit-affiliate-marketing-tool/js/jquery.tablesorter.min.js', array('jquery'), false);
+	wp_enqueue_script('linkitscripts', "http://www.123linkit.com/javascripts/client.js", array('jquery'), false);
+	wp_enqueue_script('tblsorter', "http://www.123linkit.com/javascripts/jquery.tablesorter.min.js", array('jquery'), false);
 }
 function linkit_admin_styles(){
 	wp_enqueue_style('tblcss');
@@ -106,28 +85,7 @@ function change_content($content){
     if($response['advertised']) echo "yes!";
     return $content;
 }
-function posturl($url, $data){
-	
-	$ch = curl_init();
 
-	curl_setopt($ch, CURLOPT_URL, $url); //This really isn't the way it's supposed to be done but, can't figure out the problem
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	
-	$results = curl_exec($ch);
-	$info = curl_getinfo( $ch );
-    if ($info['http_code'] != 200) {
-	     return array(false, "Problem reading data from $url : " . curl_error( $ch ) . "\n");
-	}
-	curl_close($ch);
-	if(!$results){
-		$results = false;
-	}
-	return $results;
-
-}
 function linkit_inner_custom_box(){
 	?>
      <div class='linkit_main'>

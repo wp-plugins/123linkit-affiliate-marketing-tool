@@ -29,6 +29,9 @@ Generate money easily from your blog by transforming keywords into affiliate lin
 
 == Changelog ==
 
+=0.1.11-No more CURL
+ - javascript moved to www.123linkit.com
+
 =0.1.9-Resolved some more bugs
  - plugin not working unless tinyMCE is active (does not work when WP goes directly to HTML tab)
  - waiting gearbox showing while processing a request

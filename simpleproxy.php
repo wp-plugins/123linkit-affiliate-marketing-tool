@@ -1,63 +1,59 @@
 <?php
 
 $api_address = "www.123linkit.com";
-
 header("Cache-Control: no-cache");
 
 $path = "http://$api_address/api/";
 $agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5";
 
-
-function geturl($url){
-	$ch = curl_init();
-	$timeout = 5;
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-
-	$results = curl_exec($ch);
-	curl_close($ch);
-	return $results;
-}
 function posturl($url, $data){
-	
-	$ch = curl_init();
+    $url = parse_url($url);
 
-	curl_setopt($ch, CURLOPT_URL, $url); //This really isn't the way it's supposed to be done but, can't figure out the problem
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_USERAGENT, $agent);
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	
-	$results = curl_exec($ch);
-	$info = curl_getinfo( $ch );
-    if ($info['http_code'] != 200) {
-	     return array(false, "Problem reading data from $url : " . curl_error( $ch ) . "\n");
-	}
-	curl_close($ch);
-	if(!$results){
-		$results = false;
-	}
-	return $results;
+    if ($url['scheme'] != 'http') die('Only HTTP request are supported !');
 
+    // extract host and path:
+    $host = $url['host'];
+    $path = $url['path'];
+
+    // open a socket connection on port 80
+    $fp = fsockopen($host, 80);
+
+    // send the request headers:
+    fputs($fp, "POST $path HTTP/1.1\r\n");
+    fputs($fp, "Host: $host\r\n");
+    fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+    fputs($fp, "Content-length: ". strlen($data) ."\r\n");
+    fputs($fp, "Connection: close\r\n\r\n");
+    fputs($fp, $data);
+
+    $result = ''; 
+    while(!feof($fp)) {
+        // receive the results of the request
+
+        $result .= fgets($fp, 128);
+    }
+
+    // close the socket connection:
+    fclose($fp);
+
+    // split the result header from the content
+    $result = explode("\r\n\r\n", $result, 2);
+    $header = isset($result[0]) ? $result[0] : '';
+    $content = isset($result[1]) ? $result[1] : '';
+
+    // return as array:
+    return $content;
 }
+
 //When we get a post request...
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	
-	/*if (!isset($_POST['_pubkey']) || !isset($_POST['_privkey'])) {
-	    header($_SERVER['SERVER_PROTOCOL'] . " 500");
-	    header("Content-Type: text/plain");
-	    die("No api key.\n");
-	}Deal with this later*/ 
-	   
+if($_SERVER['REQUEST_METHOD'] == 'POST') {	   
 	$postvars = '';
 	$url = '';
 	while ( ($element = current( $_POST ))!==FALSE ) {
-			 if(key($_POST) == "url"){
+			 if(key($_POST) == "url") {
 				$url = $element;
 				next($_POST);
-			 }else{
+			 } else {
 				$new_element = str_replace( '&', '%26', $element );
 				$new_element = str_replace( ';', '%3B', $new_element );
 				$postvars .= key( $_POST ).'='.$new_element.'&';
@@ -68,9 +64,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$results = posturl($path.$url, $postvars);
 	header("Content-type: text/plain");
 	echo $results;
-
-//Well what if we get a GET request?
-}else{
+} else {
 	 echo "buzz off";	
 }
 ?>
