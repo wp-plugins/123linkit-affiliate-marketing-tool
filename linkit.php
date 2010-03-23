@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! To get started, sign up at 123LinkIt.com for an account and Navigate to Settings -> 123LinkIt configuration to input your API keys.
-Version: 0.1.12
+Version: 0.2
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -56,34 +56,12 @@ $keys = get_option('linkit_keys');
         }
     </script>
 <?php
-	wp_enqueue_script('linkitscripts', "http://www.123linkit.com/javascripts/client.js", array('jquery'), false);
+	wp_enqueue_script('linkitscripts', "http://www.123linkit.com/javascripts/client1.js", array('jquery'), false);
 	wp_enqueue_script('tblsorter', "http://www.123linkit.com/javascripts/jquery.tablesorter.min.js", array('jquery'), false);
 }
 function linkit_admin_styles(){
 	wp_enqueue_style('tblcss');
 	wp_enqueue_style('linkitcss');
-}
-function change_content($content){
-    //TODO automatically replace links dynamically based on blog type   
-    $keys = get_option('linkit_keys');
-   
-    global $api_address;
-
-    $url = "http://$api_address/api/";
-    $blg = "getBlogId/view.json";
-    
-    $data = "baseurl=".get_bloginfo('url')."&_pubkey=".$keys['_pubkey']; 
-
-    $response = posturl($url.$blg, $data);
-
-		$response = json_decode($response);
-		$id = $response->{'blogs'}->{'blog'}->{'id'};
-    
-    $adv = "getAdvertisers/$id/posts/advertise.json";
-    $data = "content=$content&_privkey=".$keys['_privkey'];
-    $response = posturl($url.$adv,$data);
-    if($response['advertised']) echo "yes!";
-    return $content;
 }
 
 function linkit_inner_custom_box(){

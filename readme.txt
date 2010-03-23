@@ -13,21 +13,33 @@ Generate money easily from your blog by transforming keywords into affiliate lin
 
 == Installation ==
 
+IMPORTANT! PLEASE FOLLOW THESE INSTRUCTIONS TO ENSURE THE PLUGIN WORKS FOR YOU. 
+
+For a video tutorial, check out this quick 1 minute Vimeo video - http://vimeo.com/10388133
+
 1. Install the plugin
 2. Create an account at [123LinkIt](http://www.123linkit.com "123LinkIt") to receive your Public & Private API keys. These keys will allow us to track your commissions and link data 
 3. In your WordPress blog, go to Settings -> 123LinkIt configuration and input your keys. We recommend copying and pasting these directly to avoid inaccuracy.
+
+Contact us at support@123LinkIt.com for questions or check out our blog for information on our latest releases - http://www.123linkit.org/blog
 
 == Frequently Asked Questions ==
 
 = See http://123linkit.com/general/faq for a full list
 
-= Sign up to be notified when we release versions for other blogging platforms at http://123linkit.wufoo.com/forms/thank-you-for-your-interest
+= Sign up to be notified for other releases at http://123linkit.wufoo.com/forms/thank-you-for-your-interest
 
 == Screenshots ==
 
 =Visit our homepage for more info at http://www.123LinkIt.com
 
 == Changelog ==
+
+=0.2 Huge improvements
+	- cloaking links
+	- new UI
+	- automatically add links to post
+	- repeating links
 
 =0.1.11-No more CURL
  - javascript moved to www.123linkit.com
