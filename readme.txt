@@ -35,6 +35,8 @@ Contact us at support@123LinkIt.com for questions or check out our blog for info
 
 == Changelog ==
 
+=0.3 Architectural improvements - will allow us to do more things without updating the plugin
+
 =0.2 Huge improvements
 	- cloaking links
 	- new UI
