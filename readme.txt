@@ -35,6 +35,9 @@ Contact us at support@123LinkIt.com for questions or check out our blog for info
 
 == Changelog ==
 
+=0.5
+	- plugin now uses tracker on 123linkit.com and does not mess links around
+
 =0.4
 	- plugin added to pages
 	- plugin now shows by default in the centre
