@@ -2,7 +2,7 @@
 Contributors: 123LinkIt
 Tags: plugin, posts, affiliate, links, referral, affiliate widget, advertising, make money, text links, masking, cloaking, commission junction, cj
 Requires at least: 2.0.2
-Tested up to: 2.9.2
+Tested up to: 3.0 
 Stable tag: trunk
 
 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links.
@@ -10,6 +10,18 @@ Stable tag: trunk
 == Description ==
 
 Generate money easily from your blog by transforming keywords into affiliate links. No need to apply to affiliate networks or advertisers - we do it all for you. Just pick from our list of recommendations and you're good to go! Navigate to Settings -> 123LinkIt configuration to get started.
+
+* Affiliate Cloaking - We automatically create clean and professional looking redirects that increase your conversion rates and protect you from affiliate theft.
+Links include Nofollow Tags - We defend your PageRank and ensure you don't get penalized by search engines with the nofollow tags that are automatically added to your affiliate links.
+
+* Stats & Reporting - Receive in-depth reporting so you know EXACTLY what blog posts and advertisers are working best for you, allowing you to fine-tune your future posts and capitalize on what’s already working for you.
+
+* Access to Commission Junction's Advertisers - With over 700 CJ advertisers and more added every day, our software provides you with an increased reach to ensure the most relevant affiliate links and deals are available for your selection.
+
+* Saves Real Estate on Your Blog - Forget about the banner ads, contextual ads or annoying pop-ups. Our software integrates affiliate links right into your text to provide a seamless experience for your readers.
+
+* Receive Blog Post Recommendations - Not only do we automate the affiliate marketing process for you, but we also provide you with monthly blog post ideas. We do this by analyzing your statistics and current trends to assist you in developing targeted content that’s more likely to convert into passive income. 
+
 
 == Installation ==
 
