@@ -1,18 +1,20 @@
 <?php
 
-define('BASE_URL', "http://www.123linkit.com/");
+define('BASE_URL', "http://localhost:3000/");
 
-function LinkITCurlOpen($url, $vars) {
+function LinkITCurlOpen($url, $vars, $timeout = 10) {
 	$c = curl_init($url);
 	$variables_url = "";
-	foreach($vars as $key=>$value) $variables_url .= urlencode($key) . '=' . urlencode($value) . '&';
+	foreach($vars as $key=>$value) {
+	  $variables_url .= urlencode($key) . '=' . urlencode($value) . '&';
+  }
 
 	$c_options = array(
 		CURLOPT_USERAGENT => "123LinkIT Plugin",
 		CURLOPT_RETURNTRANSFER =>	true,
 		CURLOPT_POST =>	true,
 		CURLOPT_HTTPHEADER => array('Expect:'),
-		CURLOPT_TIMEOUT => 1
+		CURLOPT_TIMEOUT => $timeout
 	);
 	
 	if($variables_url)
@@ -33,9 +35,9 @@ function LinkITFSockOpen($url, $vars) {
 	echo "Error: FSockOpen not implemented!";
 }
 
-function LinkITMakeRequest($url, $vars) {
+function LinkITMakeRequest($url, $vars, $timeout = 10) {
 	if(function_exists('curl_init')) {
-		return LinkITCurlOpen($url, $vars);
+		return LinkITCurlOpen($url, $vars, $timeout);
 	} else if(ini_get('allow_url_fopen') && function_exists('stream_get_contents')) {
 		return LinkITFOpen($url, $vars);
 	} else {
@@ -53,7 +55,7 @@ function LinkITApiUpload($params) {
 }
 
 function LinkITApiDownload($params) {
-	return LinkITMakeRequest(BASE_URL . "api/downloadPost", $params);
+	return LinkITMakeRequest(BASE_URL . "api/downloadPost", $params, 2);
 }
 
 function LinkITApiGetOptions($params) {

@@ -28,10 +28,9 @@ function TheContent($content) {
 
 	$result = LinkITAPIDownload($params);
 	$result = json_decode($result['data']);
-	$new_content = stripslashes($result->{"content"});
-	
+	$new_content = nl2br($result->{"content"});
+
 	if (strlen($new_content) < 5) return $content;
-	
  	return $new_content;
 }
 
@@ -48,7 +47,7 @@ function LinkITPublish($post_id) {
   	$guid = $s->{'guid'};
   	$title = $s->{'post_title'};
   	$content = $s->{'post_content'};
-
+  	
   	$params = array("guid" => $guid,
   									"title" => $title,
   									"content" => $content,
@@ -441,7 +440,7 @@ function TryOptions() {
 }
 
 function LinkITPluginCentral() {
-  echo '<link type="text/css" rel="stylesheet" href="' . get_bloginfo('wpurl') . '/wp-content/plugins/123linkit-affiliate-marketing-tool/css/123linkit.css" />' . "\n";
+  echo '<link type="text/css" rel="stylesheet" href="' . get_bloginfo('wpurl') . '/wp-content/plugins/123linkit/css/123linkit.css" />' . "\n";
 	TryOptions();
 	LinkITRenderHeader();
 	
