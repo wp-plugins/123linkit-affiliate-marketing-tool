@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: Generate money easily from your blog by transforming brand names and product keywords into affiliate links. There’s no need to apply to affiliate networks or programs - we do it all for you. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
-Version: 1.1
+Version: 1.101
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -51,13 +51,14 @@ Author URI: http://www.123linkit.com/
           $params = array("guid" => $guid,
                           "private_key" => $private_key,
                           "blog_url" => get_bloginfo("url"));
-          if ($new_content=LinkITGetCachedPost($guid))
-            return $new_content;
+					$cached_content = LinkITGetCachedPost($guid);
+					if (strlen($cached_content) > strlen($content))
+            return $cached_content;
           else {
             $result = LinkITAPIDownload($params);
             $result = json_decode($result['data']);
             $new_content = $result->{"content"};
-            if (strlen($new_content) < 5) $new_content = $content;
+            if (strlen($new_content) < strlen($content)) $new_content = $content;
             
             $new_content = wptexturize($new_content);
             $new_content = convert_smilies($new_content);
@@ -66,7 +67,7 @@ Author URI: http://www.123linkit.com/
             $new_content = prepend_attachment($new_content);
 
             LinkITDeleteCachedPost($guid);
-            LinkITAddCachedPost($guid,$new_content);
+            LinkITAddCachedPost($guid, $new_content);
             return $new_content;
           }
         }
