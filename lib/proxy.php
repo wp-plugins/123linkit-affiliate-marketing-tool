@@ -1,6 +1,6 @@
 <?php
 
-define('BASE_URL', "http://www.123linkit.com/");
+define('BASE_URL', "http://localhost:3000/");
 
 function LinkITCreateRequestsTable()
 {
@@ -86,10 +86,20 @@ function LinkITGetCachedPost($guid)
     $post = $wpdb->get_row("SELECT * FROM $table_name WHERE guid = '$guid'");
     $t1=time();
     $t2=strtotime($post->updated);
-    if ($t1 - $t2 <= 24*60*60 ) 
-      return $post->contents;
-    else
-      return 0;
+    if ( $t1 - $t2 <= 5*60 ) {
+      //check for new version
+      $private_key = get_option('LinkITPrivateKey');
+      $params = array("guid" => $guid,
+                          "private_key" => $private_key,
+                          "blog_url" => get_bloginfo("url"));
+      $result = LinkITAPIGetPostHash($params);
+      $result = json_decode($result['data']);
+      $server_hash = $result -> hash;
+      $local_hash = md5($post -> contents);
+      if ($server_hash == $local_hash)
+        return $post -> contents;
+    }
+    return 0;
 }
 
 
@@ -162,6 +172,11 @@ function LinkITMakeRequest($url, $vars, $timeout = 10) {
 
 	}
 }
+
+function LinkITAPIGetPostHash($params) {
+	return LinkITMakeRequest(BASE_URL . "api/getHashedPost", $params);
+}
+
 function LinkITAPISetCategory($blog_category) {
   $request = array('blog_category' => $blog_category, 'blog_url' => get_bloginfo("url"), 'private_key' => get_option('LinkITPrivateKey'));
   return LinkITMakeRequest(BASE_URL . "api/setBlogCategory", $request);
