@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: Generate money easily from your blog by transforming brand names and product keywords into affiliate links. There’s no need to apply to affiliate networks or programs - we do it all for you. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
-Version: 1.102
+Version: 1.103
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -15,10 +15,6 @@ Author URI: http://www.123linkit.com/
             LinkITSignUpAlert();
         }
 
-        function loadjQuery() {
-          echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>';
-        }
-        
         function LinkITSignUpAlert() { 
           echo '<div id="linkitnotification" class="error" style="padding:5px;background-color:#FFDAB4;border-color:#FE7A4D;"><p style="color:red;">Thanks for using 123LinkIt!</p>';
           echo '<p>For new users - to add money-making affiliate links to your posts, click on the <a href="?page=LinkITPluginCentral&step=signup">123LinkIt</a>  tab and register for an account. <br />';
@@ -28,7 +24,7 @@ Author URI: http://www.123linkit.com/
           echo '</div>';
         } 
         add_action('admin_notices','LinkITAlert');
-        add_action('init', 'loadjQuery');
+        wp_enqueue_script("jquery");
         
         require_once("lib/proxy.php");
 
