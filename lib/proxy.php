@@ -1,6 +1,6 @@
 <?php
 
-define('BASE_URL', "http://localhost:3000/");
+define('BASE_URL', "http://www.123linkit.com/");
 
 function LinkITCreateRequestsTable()
 {
