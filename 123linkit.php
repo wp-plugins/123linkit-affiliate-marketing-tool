@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: Generate money easily from your blog by transforming brand names and product keywords into affiliate links. There’s no need to apply to affiliate networks or programs - we do it all for you. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
-Version: 1.104
+Version: 1.105
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -760,4 +760,3 @@ function LinkITPluginCentral() {
 	}
 }
 ?>
-
