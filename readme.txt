@@ -51,6 +51,9 @@ Compatibility: The plugin is compatible with WordPress 2.8.0 or higher. It is NO
 
 == Changelog ==
 
+=1.111
+  - fixed issues with formatting and cloaked links
+
 =1.1
   - major update release
   - Instant automation of affiliate links with new dashboard interface
