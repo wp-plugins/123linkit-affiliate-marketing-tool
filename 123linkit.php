@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: Generate money easily from your blog by transforming brand names and product keywords into affiliate links. There’s no need to apply to affiliate networks or programs - we do it all for you. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
-Version: 1.105
+Version: 1.11
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -28,7 +28,6 @@ Author URI: http://www.123linkit.com/
           wp_enqueue_script("jquery");
         }
         add_action('init','loadjQuery');
-        
         require_once("lib/proxy.php");
 
         add_action('admin_menu', 'LinkITMenu');
@@ -48,7 +47,7 @@ Author URI: http://www.123linkit.com/
           global $wpdb;
           $poststable = $wpdb->prefix . "posts";
           //make sure we have a table
-          //LinkITCreateCacheTable();
+          LinkITCreateCacheTable();
 
           $guid = get_the_guid(0);
           $private_key = get_option("LinkITPrivateKey");
@@ -62,19 +61,20 @@ Author URI: http://www.123linkit.com/
             $result = LinkITAPIDownload($params);
             $result = json_decode($result['data']);
             $new_content = $result->{"content"};
-
+            
            // if (strlen($new_content) < 5) $new_content = $content;
 
             if (strlen($new_content) < strlen($content)) $new_content = $content;
-            /*
+            $hash = md5($new_content);
+
             $new_content = wptexturize($new_content);
             $new_content = convert_smilies($new_content);
             $new_content = convert_chars($new_content);
             $new_content = wpautop($new_content);
             $new_content = prepend_attachment($new_content);
-*/
+          
             LinkITDeleteCachedPost($guid);
-            LinkITAddCachedPost($guid, $new_content);
+            LinkITAddCachedPost($guid, $new_content, $hash);
             return $new_content;
           }
         }

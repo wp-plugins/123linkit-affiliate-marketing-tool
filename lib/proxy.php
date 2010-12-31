@@ -7,7 +7,7 @@ function LinkITCreateRequestsTable()
     global $wpdb;
     $table_name = $wpdb->prefix . "linkit_requests";
     if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-      echo "<b>no table</b>";
+
       $sql = "CREATE TABLE ". $table_name ."(
               request varchar(255) NOT NULL,
 	      data_sent text NOT NULL,
@@ -54,18 +54,19 @@ function LinkITCreateCacheTable()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "linkit_cached_posts";
-    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+//    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 
       $sql = "CREATE TABLE " . $table_name . " (
               guid varchar(255) NOT NULL,
               contents text NOT NULL,
+              hash varchar(255) NOT NULL,
               updated datetime NOT NULL,
               UNIQUE KEY guid (guid)
               );";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
-    }
+//    }
 
 //    $rows_affected = $wpdb->insert( $table_name, array( 'updated' => current_time('mysql'), 'guid' => 'hello', 'contents' => 'ciao' ) );
 }
@@ -94,8 +95,10 @@ function LinkITGetCachedPost($guid)
                           "blog_url" => get_bloginfo("url"));
       $result = LinkITAPIGetPostHash($params);
       $result = json_decode($result['data']);
+        
       $server_hash = $result -> hash;
-      $local_hash = md5($post -> contents);
+      $local_hash = $post -> hash;
+
       if ($server_hash == $local_hash)
         return $post -> contents;
     }
@@ -103,12 +106,12 @@ function LinkITGetCachedPost($guid)
 }
 
 
-function LinkITAddCachedPost($guid,$contents)
+function LinkITAddCachedPost($guid, $contents, $hash)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "linkit_cached_posts";
     
-    $rows_affected = $wpdb->insert( $table_name, array( 'updated' => current_time('mysql'), 'guid' => $guid, 'contents' => $contents ) );
+    $rows_affected = $wpdb->insert( $table_name, array( 'updated' => current_time('mysql'), 'guid' => $guid, 'contents' => $contents, 'hash' => $hash) );
 }
 
 function LinkITCurlOpen($url, $vars, $timeout = 10) {
@@ -131,24 +134,43 @@ function LinkITCurlOpen($url, $vars, $timeout = 10) {
 }
 
 function LinkITFOpen($url, $vars) {
-	$variables_url = "";
+	$variables_url = "/?";
 	foreach($vars as $key=>$value) {
 		$variables_url .= urlencode($key) . '=' . urlencode($value) . '&';
   	}
-	$handle = fopen($url+$variables_url,"r");
-	$response['data']=fread($handle, filesize($filename));
+	$handle = @fopen($url.$variables_url,"b");
+	if ( $handle ) {
+		$res = "";
+	  while ( !feof($handle) )
+	    $res .= fread($handle, 128);
+	  $response['data'] = $res;
+	  fclose($handle);
+	}
 	return $response;
-	fclose($handle);
 }
 
-function LinkITFSockOpen($url, $vars) {
-	$variables_url = "";
+function LinkITFSockOpen($host, $resource, $vars) {
+  $variables_url = "";
 	foreach($vars as $key=>$value) {
 		$variables_url .= urlencode($key) . '=' . urlencode($value) . '&';
-  	}
-	$fp = fsockopen($url+$variables_url, 80);
-	$response['data']=fgets($handle, filesize($filename));
-	fclose($handle);
+  }
+  $fp = fsockopen($host);
+  if ($fp) {    
+    
+    $out = "GET /$resource/?$variables_url HTTP/1.1\r\n";
+    
+    echo $out;
+    
+    $out .= "Host: blogurl\r\n";
+    $out .= "User-Agent: 123LinkIt Plugin\r\n\r\n";
+    $out .= "Connection: Close\r\n\r\n";
+    fwrite($fp, $out);
+    $response['data'] = "";
+    while (!feof($fp)) {
+        $response['data'] .= fgets($fp, 256);
+    }
+    fclose($fp);
+  }
 	return $response;
 }
 
@@ -165,7 +187,10 @@ function LinkITMakeRequest($url, $vars, $timeout = 10) {
 		return $response;
 
 	} else {
-		$response=LinkITFSockOpen($url, $vars);
+	  $host = str_replace("http://","" ,BASE_URL);
+	  $host = str_replace("/","" ,$host);
+	  $resource = str_replace(BASE_URL, "", $url); 
+		$response = LinkITFSockOpen($host, $resource, $vars);
 // loging
 		LinkITAddRequest($url,$vars,$response['data']);		
 		return $response;
@@ -207,7 +232,7 @@ function LinkITApiUpload($params) {
 }
 
 function LinkITApiDownload($params) {
-	return LinkITMakeRequest(BASE_URL . "api/downloadPost", $params, 2);
+	return LinkITMakeRequest(BASE_URL . "api/downloadPost", $params, 5);
 }
 
 function LinkITApiGetOptions($params) {
