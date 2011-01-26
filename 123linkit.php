@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: Generate money easily from your blog by transforming brand names and product keywords into affiliate links. There’s no need to apply to affiliate networks or programs - we do it all for you. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
-Version: 1.111
+Version: 1.2
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -29,9 +29,12 @@ Author URI: http://www.123linkit.com/
         }
         add_action('init','loadjQuery');
         require_once("lib/proxy.php");
+        remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+        add_filter('get_the_excerpt', 'LinkItExcerpt');
 
         add_action('admin_menu', 'LinkITMenu');
         add_action('publish_post', 'LinkITPublish');
+
         add_filter('the_content', 'TheContent');
 
         remove_filter('the_content', 'wptexturize');
@@ -39,8 +42,25 @@ Author URI: http://www.123linkit.com/
         remove_filter('the_content', 'convert_chars');
         remove_filter('the_content', 'wpautop');
         remove_filter('the_content', 'prepend_attachment');
-
+        
+        function LinkItExcerpt($text){
+            	//Please do some testing to make sure the patch does exactly what is expected.
+                global $post;
+                if ($text == ''){
+                  $text = get_the_content('');
+                  $text = strip_tags($text, '<p>');
+                  $excerpt_length = 55;
+                  $words = explode(' ', $text, $excerpt_length + 1);
+		          if (count($words)> $excerpt_length) {
+			        array_pop($words);
+			        array_push($words, '[...]');
+			        $text = implode(' ', $words);
+		            }  
+                }
+                return $text;
+        }
         function TheContent($content) {
+       
           $private_key = get_option("LinkITPrivateKey");
           if ($private_key == "") return $content;
           
