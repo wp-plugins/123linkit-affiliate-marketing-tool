@@ -1,5 +1,9 @@
-#clear {
+.clear {
 	clear: both;
+}
+hr.clear {
+	clear: both;
+	visibility: hidden;
 }
 
 #header {
@@ -157,11 +161,13 @@ ul li label {
 	margin-top: 32px;
 }
 
-.list-header {
+.list-header,
+th {
 	font-weight: bold;
 	border-bottom: 1px dotted #999;
 	color: #f0940f;
-	margin-top: 20px
+	padding-top: 20px;
+	text-align: left;
 }
 
 a {
@@ -177,4 +183,15 @@ label.multiple {
 input.multiple {
   float: none;
   min-width: 20px;
+}
+
+#challenge ul {
+	margin-left: 20px; 
+	margin-top: 10px; 
+	list-style: circle; 
+}
+
+#challenge ul li {
+	width: 50%;
+	float: left;
 }
