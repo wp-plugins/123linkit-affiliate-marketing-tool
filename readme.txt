@@ -2,7 +2,8 @@
 Contributors: 123LinkIt
 Tags: advertising, affiliate, affiliate marketing, affiliate plugin, affiliate widget, cj, commission junction, earn money, make money, monetization, referral links, text links, 123Linkit, 123 LinkIt, mom blog, mom blogger, mommy blogger, LinkIt, affiliate tool
 Requires at least: 2.8
-Tested up to: 3.0 
+Last updated: 07.20.2011
+Tested up to: 3.2.1 
 Stable tag: trunk
 
 123LinkIt Affiliate Plugin - Generate money easily from your blog by transforming keywords into affiliate links.
@@ -66,6 +67,10 @@ For other FAQ questions, visit our site at http://www.123linkit.com/affiliate-pl
 Visit our homepage for more info at http://www.123LinkIt.com
 
 == Changelog ==
+
+=1.3
+  - major refactor
+  - bug fixes
 
 =1.2 
   - major update release
