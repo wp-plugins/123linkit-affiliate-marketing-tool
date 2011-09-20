@@ -10,8 +10,6 @@ Stable tag: trunk
 
 == Description ==
 
-Name: 123LinkIt Affiliate Marketing Tool for Mom Bloggers
-
 The 123LinkIt plugin streamlines the affiliate marketing process by transforming brand names and product keywords into affiliate links. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
 
 Links include Nofollow Tags - We defend your PageRank and ensure you don't get penalized by search engines with nofollow tags that are automatically added to your affiliate links.
@@ -25,8 +23,6 @@ Access to Commission Junction's Advertisers - With almost 1000 CJ advertisers an
 Saves Real Estate on Your Blog - Forget about the banner ads, contextual ads or annoying pop-ups. Our software integrates affiliate links right into your text to provide a seamless experience for your readers.
 
 Cash Back Program - Not only do we pay the highest commission payout anywhere at 85%, we also put an additional 5% toward marketing your blog and sending new users directly to your best and highest performing blog posts.
-
-Disclaimer: We are currently targeting Mom bloggers because we believe they have the most potential from using our tool. However, all bloggers are welcome to use 123LinkIt. We have tech blogs, fitness blogs, sports blogs, etc. in our system and we plan on targeting other verticals soon.
 
 This plugin is compatible with plugin versions 2.8.0 and up.  It is NOT compatible with BuddyPress or versions below 2.8.0.
 
@@ -68,47 +64,58 @@ Visit our homepage for more info at http://www.123LinkIt.com
 
 == Changelog ==
 
-=1.3
-  - major refactor
-  - bug fixes
+= 1.3.1 =
+* fixed bug with pagination on home/archive pages
+* streamlined the signup process for new users a bit
 
-=1.2 
-  - major update release
-  - targeted to mom bloggers
+= 1.3 =
+* major refactor
+ * bug fixes
 
-=1.1
-  - major update release
-  - Instant automation of affiliate links with new dashboard interface
-  - Users can log in or create new account within plugin
-  - Added Stats, 123Linkit Challenge, Bug Report, Reset Plugin, notification bar
+= 1.2 =
+* major update release
+* targeted to mom bloggers
 
-=0.5
-	- plugin now uses tracker on 123linkit.com and does not mess links around
+= 1.1 =
+* major update release
+* Instant automation of affiliate links with new dashboard interface
+* Users can log in or create new account within plugin
+* Added Stats, 123Linkit Challenge, Bug Report, Reset Plugin, notification bar
 
-=0.4
-	- plugin added to pages
-	- plugin now shows by default in the centre
+= 0.5 =
+*  plugin now uses tracker on 123linkit.com and does not mess links around
 
-=0.3 Architectural improvements - will allow us to do more things without updating the plugin
+= 0.4 =
+* plugin added to pages
+* plugin now shows by default in the centre
 
-=0.2 Huge improvements
-	- cloaking links
-	- new UI
-	- automatically add links to post
-	- repeating links
+= 0.3 =
+*  Architectural improvements - will allow us to do more things without updating the plugin
 
-=0.1.11-No more CURL
- - javascript moved to www.123linkit.com
+= 0.2 =
+* Huge improvements
+* cloaking links
+* new UI
+* automatically add links to post
+* repeating links
 
-=0.1.9-Resolved some more bugs
- - plugin not working unless tinyMCE is active (does not work when WP goes directly to HTML tab)
- - waiting gearbox showing while processing a request
+= 0.1.11 =
+* No more CURL
+* javascript moved to www.123linkit.com
 
-=0.1.8-Resolved JS Error
+= 0.1.9 =
+* Resolved some more bugs
+* plugin not working unless tinyMCE is active (does not work when WP goes directly to HTML tab)
+* waiting gearbox showing while processing a request
 
-=0.1.5-Removed Copy Link column and added URL to advertiser URL field to make it easier to copy. 
+= 0.1.8 =
+* Resolved JS Error
 
-=0.1.4-Added new description with more details, fixed links bug.
+= 0.1.5 =
+* Removed Copy Link column and added URL to advertiser URL field to make it easier to copy. 
+
+= 0.1.4 =
+* Added new description with more details, fixed links bug.
 
 =0.0.1-Alpha release-this is the first version of the plugin and some problems will arise. Please contact us anytime with questions or to report bugs. We're committed to making continously improving this plugin and adding new features so please send in your feedback and ideas too.
 

@@ -3,7 +3,7 @@
 Plugin Name: 123Linkit Affiliate Marketing Tool
 Plugin URI:  http://www.123linkit.com/general/download
 Description: Generate money easily from your blog by transforming brand names and product keywords into affiliate links. There’s no need to apply to affiliate networks or programs - we do it all for you. Just install the plugin, sync your posts and we’ll automatically add relevant, money-making affiliate links to your blog.
-Version: 1.3.0
+Version: 1.3.1
 Author: 123Linkit, LLC.
 Author URI: http://www.123linkit.com/
 */
@@ -705,6 +705,15 @@ LINKIT_HEADER2;
 	}
 
 	/**
+	 * Implementation of found_posts hook/filter
+	 * This is setup within the post_results function below to preserve the $wp_query->found_posts value while accessing caches
+	*/
+	function found_posts_fix($n)
+	{
+		return $this->found_posts;
+	}
+	
+	/**
 	 * Implementation of post_results hook
 	 * Alters the post content right after the post is fetched from the database to use the cached data
 	 * Makes use of the custom cache tables
@@ -720,6 +729,10 @@ LINKIT_HEADER2;
 		global $wpdb;
 		$poststable = $wpdb->prefix . "posts";
 
+		//make sure to correctly set found_posts later
+		$this->found_posts = $wpdb->get_var("SELECT FOUND_ROWS()");
+		add_filter("found_posts", array($this, "found_posts_fix"));
+		
 		foreach($posts as $index => $post) {
 			$guid = $post->guid;
 
@@ -795,7 +808,7 @@ LINKIT_HEADER2;
 	 * Displays the signup alert if the plugin hasn't been configured yet.
 	 */
 	function admin_notices( ) {
-		if ( get_option( 'LinkITConfig' ) != 'done' ) {
+		if ( get_option( 'LinkITConfig' ) != 'done' && $_REQUEST['step'] != "signup") {
 			$alert = new LinkitView('signup_alert.php');
 			$alert->render();
 		}
@@ -815,9 +828,16 @@ LINKIT_HEADER2;
 	 * Implmentation of the admin_menu hook
 	 * Adds various menu options to the main WP admin menu
 	 */
-	function admin_menu() {
+	function admin_menu() {	
 		if($this->publickey == '') {
-			add_menu_page( '123LinkIt', '123LinkIt', 'manage_options', 'linkit_plugin', array($this, 'login'), 'http://www.123linkit.com/images/123linkit.favicon.gif', 3 );
+			add_menu_page( '123LinkIt', '123LinkIt', 'manage_options', 'linkit_plugin', array($this, 'login'), 'http://www.123linkit.com/images/123linkit.favicon.gif', 3 );						
+			
+			//catch users trying to get to the other pages			
+			if(in_array($_REQUEST['page'], array("linkit_options", "linkit_challenge", "linkit_logout", "linkit_reportbug")))
+			{
+				wp_redirect("?page=linkit_plugin");
+				exit;
+			}
 		}
 		else {
 			add_menu_page( '123LinkIt', '123LinkIt', 'manage_options', 'linkit_plugin', array($this, 'admin'), 'http://www.123linkit.com/images/123linkit.favicon.gif', 3 );
